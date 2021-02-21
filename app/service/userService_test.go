@@ -1,7 +1,7 @@
 package service
 
 import (
-	"ApiRest/app/repository"
+	"github.com/jaumeCloquellCapo/authGrpc/app/repository"
 	"reflect"
 	"testing"
 )

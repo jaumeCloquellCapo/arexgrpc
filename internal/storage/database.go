@@ -1,9 +1,9 @@
 package storage
 
 import (
-	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
 	"log"
 	"os"
 	"time"
@@ -11,7 +11,7 @@ import (
 
 // DbStore ...
 type DbStore struct {
-	*sql.DB
+	*sqlx.DB
 }
 
 // Opening a storage and save the reference to `Database` struct.
@@ -20,9 +20,9 @@ func InitializeDB() *DbStore {
 	cnf := fmt.Sprintf("%s:%s@tcp(%s)/%s", os.Getenv("DB_USERNAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_HOST"), os.Getenv("DB_DATABASE"))
 
 	var err error
-	var db *sql.DB
+	var db *sqlx.DB
 
-	if db, err = sql.Open("mysql", cnf); err != nil {
+	if db, err = sqlx.Open("mysql", cnf); err != nil {
 		log.Fatal(err)
 	}
 

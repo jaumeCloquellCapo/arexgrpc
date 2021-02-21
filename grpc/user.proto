@@ -77,6 +77,5 @@ message LogoutResponse {}
 service UserService{
   rpc Register(RegisterRequest) returns (TokenDetails);
   rpc Login(LoginRequest) returns (TokenDetails);
-  rpc GetMe(GetMeRequest) returns(GetMeResponse);
   rpc Logout(LogoutRequest) returns(LogoutResponse);
 }

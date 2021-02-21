@@ -110,7 +110,7 @@ func (ar authRepository) DeleteAuth(AccessUUID string) error {
 
 	if err != nil {
 		if err == redis.Nil {
-			return error2.NewErrorNotFound("Redis not found")
+			return error2.ErrNotFound
 		}
 		return err
 	}

@@ -891,7 +891,7 @@ var file_user_proto_rawDesc = []byte{
 	0x73, 0x18, 0x06, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x52, 0x74, 0x45, 0x78, 0x70, 0x69, 0x72,
 	0x65, 0x73, 0x22, 0x0f, 0x0a, 0x0d, 0x4c, 0x6f, 0x67, 0x6f, 0x75, 0x74, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x22, 0x10, 0x0a, 0x0e, 0x4c, 0x6f, 0x67, 0x6f, 0x75, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x94, 0x02, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xd4, 0x01, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x53, 0x65,
 	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x43, 0x0a, 0x08, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65,
 	0x72, 0x12, 0x1c, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
 	0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
@@ -900,11 +900,7 @@ var file_user_proto_rawDesc = []byte{
 	0x67, 0x69, 0x6e, 0x12, 0x19, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19,
 	0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x3e, 0x0a, 0x05, 0x47, 0x65, 0x74,
-	0x4d, 0x65, 0x12, 0x19, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x2e, 0x47, 0x65, 0x74, 0x4d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e,
-	0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x4d,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x41, 0x0a, 0x06, 0x4c, 0x6f, 0x67,
+	0x65, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x41, 0x0a, 0x06, 0x4c, 0x6f, 0x67,
 	0x6f, 0x75, 0x74, 0x12, 0x1a, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x4c, 0x6f, 0x67, 0x6f, 0x75, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
 	0x1b, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x4c, 0x6f,
@@ -950,14 +946,12 @@ var file_user_proto_depIdxs = []int32{
 	1,  // 4: userService.GetMeResponse.user:type_name -> userService.User
 	2,  // 5: userService.UserService.Register:input_type -> userService.RegisterRequest
 	8,  // 6: userService.UserService.Login:input_type -> userService.LoginRequest
-	10, // 7: userService.UserService.GetMe:input_type -> userService.GetMeRequest
-	13, // 8: userService.UserService.Logout:input_type -> userService.LogoutRequest
-	12, // 9: userService.UserService.Register:output_type -> userService.TokenDetails
-	12, // 10: userService.UserService.Login:output_type -> userService.TokenDetails
-	11, // 11: userService.UserService.GetMe:output_type -> userService.GetMeResponse
-	14, // 12: userService.UserService.Logout:output_type -> userService.LogoutResponse
-	9,  // [9:13] is the sub-list for method output_type
-	5,  // [5:9] is the sub-list for method input_type
+	13, // 7: userService.UserService.Logout:input_type -> userService.LogoutRequest
+	12, // 8: userService.UserService.Register:output_type -> userService.TokenDetails
+	12, // 9: userService.UserService.Login:output_type -> userService.TokenDetails
+	14, // 10: userService.UserService.Logout:output_type -> userService.LogoutResponse
+	8,  // [8:11] is the sub-list for method output_type
+	5,  // [5:8] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1184,7 +1178,6 @@ const _ = grpc.SupportPackageIsVersion6
 type UserServiceClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*TokenDetails, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*TokenDetails, error)
-	GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*GetMeResponse, error)
 	Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error)
 }
 
@@ -1214,15 +1207,6 @@ func (c *userServiceClient) Login(ctx context.Context, in *LoginRequest, opts ..
 	return out, nil
 }
 
-func (c *userServiceClient) GetMe(ctx context.Context, in *GetMeRequest, opts ...grpc.CallOption) (*GetMeResponse, error) {
-	out := new(GetMeResponse)
-	err := c.cc.Invoke(ctx, "/userService.UserService/GetMe", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *userServiceClient) Logout(ctx context.Context, in *LogoutRequest, opts ...grpc.CallOption) (*LogoutResponse, error) {
 	out := new(LogoutResponse)
 	err := c.cc.Invoke(ctx, "/userService.UserService/Logout", in, out, opts...)
@@ -1236,7 +1220,6 @@ func (c *userServiceClient) Logout(ctx context.Context, in *LogoutRequest, opts 
 type UserServiceServer interface {
 	Register(context.Context, *RegisterRequest) (*TokenDetails, error)
 	Login(context.Context, *LoginRequest) (*TokenDetails, error)
-	GetMe(context.Context, *GetMeRequest) (*GetMeResponse, error)
 	Logout(context.Context, *LogoutRequest) (*LogoutResponse, error)
 }
 
@@ -1249,9 +1232,6 @@ func (*UnimplementedUserServiceServer) Register(context.Context, *RegisterReques
 }
 func (*UnimplementedUserServiceServer) Login(context.Context, *LoginRequest) (*TokenDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
-}
-func (*UnimplementedUserServiceServer) GetMe(context.Context, *GetMeRequest) (*GetMeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMe not implemented")
 }
 func (*UnimplementedUserServiceServer) Logout(context.Context, *LogoutRequest) (*LogoutResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
@@ -1297,24 +1277,6 @@ func _UserService_Login_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_GetMe_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(UserServiceServer).GetMe(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/userService.UserService/GetMe",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).GetMe(ctx, req.(*GetMeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _UserService_Logout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LogoutRequest)
 	if err := dec(in); err != nil {
@@ -1344,10 +1306,6 @@ var _UserService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Login",
 			Handler:    _UserService_Login_Handler,
-		},
-		{
-			MethodName: "GetMe",
-			Handler:    _UserService_GetMe_Handler,
 		},
 		{
 			MethodName: "Logout",

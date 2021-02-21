@@ -1,6 +1,6 @@
 package mock
 
-import "ApiRest/app/model"
+import "github.com/jaumeCloquellCapo/authGrpc/app/model"
 
 type MockAuthService struct{}
 

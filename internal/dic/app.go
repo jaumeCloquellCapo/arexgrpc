@@ -26,6 +26,8 @@ const AuthRepository = "repository.auth"
 const AuthService = "service.auth"
 const AuthController = "controller.auth"
 
+const Logger = "Logger"
+
 // dependency injection container
 func InitContainer() di.Container {
 	builder, err := di.NewBuilder()
@@ -98,6 +100,7 @@ func RegisterServices(builder *di.Builder) {
 			return service.NewAuthService(ctn.Get(AuthRepository).(repository.AuthRepositoryInterface), ctn.Get(UserRepository).(repository.UserRepositoryInterface)), nil
 		},
 	})
+
 	/*
 		builder.Add(di.Def{
 			Name: UserController,

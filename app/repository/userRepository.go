@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"fmt"
 	"github.com/go-sql-driver/mysql"
 	error2 "github.com/jaumeCloquellCapo/authGrpc/app/error"
 	"github.com/jaumeCloquellCapo/authGrpc/app/model"
@@ -40,7 +39,7 @@ func (r *userRepository) FindById(id int) (user *model.User, err error) {
 
 	if err := row.Scan(&user.ID, &user.Email, &user.Name, &user.PostalCode, &user.Phone, &user.LastName, &user.Country); err != nil {
 		if err == sql.ErrNoRows {
-			return nil, error2.NewErrorNotFound(fmt.Sprintf("Error: User not found by ID %d", id))
+			return nil, error2.ErrNotFound
 		}
 
 		return nil, err
@@ -68,7 +67,7 @@ func (r *userRepository) UpdateById(id int, user model.UpdateUser) error {
 	}
 
 	if rows != 1 {
-		return error2.NewErrorNotFound(fmt.Sprintf("UpdateById: User not found by id %v", id))
+		return error2.ErrNotFound
 	}
 
 	return nil
@@ -84,7 +83,7 @@ func (r *userRepository) FindByEmail(email string) (user *model.User, err error)
 
 	if err := row.Scan(&user.ID, &user.Email, &user.Name, &user.Password); err != nil {
 		if err == sql.ErrNoRows {
-			return nil, error2.NewErrorNotFound(fmt.Sprintf("FindByEmail: User not found by email %s", email))
+			return nil, error2.ErrNotFound
 		}
 		return nil, err
 	}
@@ -119,7 +118,7 @@ func (r *userRepository) Create(UserSignUp model.CreateUser) (user *model.User, 
 	if err != nil {
 		if me, ok := err.(*mysql.MySQLError); ok {
 			if me.Number == 1062 {
-				return nil, error2.NewErrorAlreadyExist(fmt.Sprintf("User by email %s already exist", UserSignUp.Email))
+				return nil, error2.ErrEmailExists
 			}
 		}
 		return
