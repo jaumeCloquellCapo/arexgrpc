@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+package userService;
+option go_package = ".;grpc";
+
+message Session {
+  string session = 1;
+}
+
+message User {
+  int64 id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string password = 5;
+  string email = 6;
+}
+
+message RegisterRequest {
+  string email = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string password = 5;
+}
+
+message RegisterResponse {
+  User user = 1;
+}
+
+message FindByEmailRequest {
+  string email = 1;
+}
+
+message FindByEmailResponse {
+  User user = 1;
+}
+
+message FindByIDRequest {
+  string uuid = 1;
+}
+
+message FindByIDResponse {
+  User user = 1;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  User user = 1;
+  string session_id = 2;
+}
+
+message GetMeRequest{}
+
+message GetMeResponse {
+  User user = 1;
+}
+
+message TokenDetails {
+  string AccessToke = 1;
+  string RefreshToken = 2;
+  string  AccessUUID   = 3;
+  string RefreshUUID  = 4;
+  int64   AtExpires    = 5;
+  int64    RtExpires = 6;
+}
+
+
+message LogoutRequest{}
+
+message LogoutResponse {}
+
+service UserService{
+  rpc Register(RegisterRequest) returns (TokenDetails);
+  rpc Login(LoginRequest) returns (TokenDetails);
+  rpc GetMe(GetMeRequest) returns(GetMeResponse);
+  rpc Logout(LogoutRequest) returns(LogoutResponse);
+}

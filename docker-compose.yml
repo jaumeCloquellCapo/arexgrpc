@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: db
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+    ports:
+      - "3306:3306"
+
+  redis:
+    image: "redis:alpine"
+    hostname: redis
+    ports:
+      - "6379:6379"
