@@ -112,7 +112,6 @@ func (r *userRepository) FindAll() (users []model.User, err error) {
 }
 
 func (r *userRepository) Create(UserSignUp model.CreateUser) (user *model.User, err error) {
-
 	query := "INSERT INTO users (name, password, email, last_name, phone, postal_code, country) values  (?, ?, ?, ?, ?, ?, ?)"
 	res, err := r.db.Exec(query, UserSignUp.Name, UserSignUp.Password, UserSignUp.Email, UserSignUp.LastName, UserSignUp.Phone, UserSignUp.PostalCode, UserSignUp.Country)
 	if err != nil {

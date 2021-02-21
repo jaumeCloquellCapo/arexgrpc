@@ -22,7 +22,6 @@ func NewInterceptor(authKey string) *Interceptor {
 	return &Interceptor{authKey}
 }
 
-
 //Auth function,
 //or Unary interceptor
 //additional security for our GRPC server
@@ -68,15 +67,16 @@ func (i *Interceptor) AuthStream(srv interface{}, stream grpc.ServerStream, info
 	return handler(srv, stream)
 }
 
-
-
-
 //VerifyToken ...
 func VerifyTokenFromContext(ctx context.Context) (*jwt.Token, error) {
 	tokenString := extractTokenFromContext(ctx)
+
 	if tokenString == nil {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid authorization")
 	}
+
+	fmt.Printf(*tokenString)
+
 	token, err := jwt.Parse(*tokenString, func(token *jwt.Token) (interface{}, error) {
 		//Make sure that the token method conform to "SigningMethodHMAC"
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -104,10 +104,9 @@ func extractTokenFromContext(ctx context.Context) *string {
 	return &authorization
 }
 
-
 /**
 ExtractTokenContext
- */
+*/
 func GetAccessTokenFromContext(ctx context.Context) (AccessDetails *model.AccessDetails, err error) {
 	token, err := VerifyTokenFromContext(ctx)
 

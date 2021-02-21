@@ -37,10 +37,9 @@ func (s *Server) Run() error {
 	//grpcMiddleware := middleware.NewInterceptor(os.Getenv("ACCESS_SECRET"))
 	//im := interceptors.NewInterceptorManager(logger)
 
-
 	server := grpc.NewServer(
-		//grpc.UnaryInterceptor(im.Logger),
-		//grpc.UnaryInterceptor(grpcMiddleware.Auth),
+	//grpc.UnaryInterceptor(im.Logger),
+	//grpc.UnaryInterceptor(grpcMiddleware.Auth),
 	)
 	ac := s.container.Get(dic.AuthService).(service.AuthServiceInterface)
 	uc := s.container.Get(dic.UserService).(service.UserServiceInterface)

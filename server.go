@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	grpc2 "github.com/jaumeCloquellCapo/authGrpc/grpc"
 	"google.golang.org/grpc"
 	"log"
@@ -18,7 +19,7 @@ func main() {
 
 	c := grpc2.NewUserServiceClient(conn)
 	response, err := c.Register(ctx, &grpc2.RegisterRequest{
-		Email:     "jausssmes@d.com",
+		Email:     "j1266344jssa@d.com",
 		FirstName: "123",
 		LastName:  "321",
 		Password:  "123456789",
@@ -26,7 +27,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	log.Printf("Response from server: %s", response)
 
+	fmt.Print(response.AccessToke)
+
+	// gRPC client and connection
+	// ...
 
 }

@@ -3,10 +3,13 @@ package repository
 import (
 	"github.com/alicebob/miniredis/v2"
 	"github.com/go-redis/redis/v8"
+	"github.com/jaumeCloquellCapo/authGrpc/app/model"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/storage"
+	"github.com/stretchr/testify/require"
 	"log"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestAuthRepositoryInit(t *testing.T) {
@@ -37,8 +40,9 @@ func TestAuthRepositoryInit(t *testing.T) {
 	}
 }
 
+func TestUser_SetUserCtx(t *testing.T) {
+	t.Parallel()
 
-func SetupRedis() *AuthRepositoryInterface {
 	mr, err := miniredis.Run()
 	if err != nil {
 		log.Fatal(err)
@@ -48,16 +52,9 @@ func SetupRedis() *AuthRepositoryInterface {
 	})
 	st := storage.DbCache{client}
 	userRedisRepository := NewAuthRepository(&st)
-	return &userRedisRepository
-}
-
-/*func TestUserRedisRepo_SetUserCtx(t *testing.T) {
-	t.Parallel()
-
-	redisRepo := *SetupRedis()
 
 	t.Run("SetUserCtx", func(t *testing.T) {
-		user := &model.User{
+		user := model.User{
 			ID:         0,
 			Name:       "jaumke",
 			LastName:   "",
@@ -73,12 +70,11 @@ func SetupRedis() *AuthRepositoryInterface {
 			RefreshToken: "1",
 			AccessUUID:   "1",
 			RefreshUUID:  "1",
-			AtExpires:    time.Now(),
-			RtExpires:    0,
+			AtExpires:    time.Now().Add(time.Minute * 15).Unix(),
+			RtExpires:    time.Now().Add(time.Hour * 24 * 7).Unix(),
 		}
 
-		err := redisRepo.CreateAuth(user, tk)
+		err := userRedisRepository.CreateAuth(user, tk)
 		require.NoError(t, err)
 	})
 }
-*/

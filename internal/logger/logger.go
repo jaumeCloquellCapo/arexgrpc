@@ -73,11 +73,11 @@ func (l *apiLogger) InitLogger() {
 	encoderCfg.NameKey = "NAME"
 	encoderCfg.MessageKey = "MESSAGE"
 
-//	if l.cfg.Logger.Encoding == "console" {
-		encoder = zapcore.NewConsoleEncoder(encoderCfg)
-//	} else {
-//		encoder = zapcore.NewJSONEncoder(encoderCfg)
-//	}
+	//	if l.cfg.Logger.Encoding == "console" {
+	encoder = zapcore.NewConsoleEncoder(encoderCfg)
+	//	} else {
+	//		encoder = zapcore.NewJSONEncoder(encoderCfg)
+	//	}
 
 	encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 	core := zapcore.NewCore(encoder, logWriter, zap.NewAtomicLevelAt(logLevel))

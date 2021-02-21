@@ -14,7 +14,7 @@ import (
 type microservice struct {
 	authService service.AuthServiceInterface
 	uService    service.UserServiceInterface
-	logger logger.Logger
+	logger      logger.Logger
 }
 
 // Auth service constructor
@@ -73,7 +73,6 @@ func (u *microservice) Login(ctx context.Context, r *grpc.LoginRequest) (*grpc.T
 		RtExpires:    tokenDetail.RtExpires,
 	}, nil
 }
-
 
 // Logout user, delete current session
 func (u *microservice) Logout(ctx context.Context, request *grpc.LogoutRequest) (*grpc.LogoutResponse, error) {
