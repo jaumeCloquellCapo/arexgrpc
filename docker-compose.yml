@@ -1,14 +1,28 @@
 version: '3'
 
 services:
+  auth_microservice:
+    container_name: auth_microservice
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    environment:
+      - PORT=8888
+    depends_on:
+      - db
+      - redis
+    restart: always
+    volumes:
+      - ./:/app
 
   db:
-    image: mysql
+    image: postgres:13-alpine
     environment:
-      MYSQL_DATABASE: db
-      MYSQL_ROOT_PASSWORD: db
-      MYSQL_USER: db
-      MYSQL_PASSWORD: db
+      POSTGRES_DB: db
+      POSTGRES_USER: db
+      POSTGRES_PASSWORD: db
     ports:
       - "3306:3306"
 
