@@ -11,9 +11,6 @@ test:							## Run all tests
 migrate_dev:
 	@goose -dir ./migrations postgres "postgresql://db:db@localhost?sslmode=disable" up
 
-migrate_generate:
-	@goose -dir ./migrations postgres "postgresql://db:db@localhost?sslmode=disable" create create_user
-
 proto:
 	protoc -I grpc -I. \
 		-I${GOPATH}/src \
