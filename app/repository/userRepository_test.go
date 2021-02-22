@@ -19,7 +19,7 @@ func TestUserRepository_FindByEmail(t *testing.T) {
 	sqlxDB := sqlx.NewDb(db, "db")
 	defer sqlxDB.Close()
 
-	userPGRepository := NewUserRepository(&storage.DbStore{DB:sqlxDB})
+	userPGRepository := NewUserRepository(&storage.DbStore{DB: sqlxDB})
 
 	columns := []string{"id", "email", "name", "password"}
 	userUUID := int64(1)

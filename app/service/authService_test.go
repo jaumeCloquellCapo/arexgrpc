@@ -42,65 +42,6 @@ func TestAuthRepositoryInit(t *testing.T) {
 	}
 }
 
-/*
-func TestAuthService_SignUp(t *testing.T) {
-	t.Parallel()
-
-	ctrl := gomock.NewController(t)
-	defer ctrl.Finish()
-	userR := mock.NewMockUserPGRepository(ctrl)
-	authR := mock.NewMockAuthRepository(ctrl)
-	authServerGRPC := NewAuthService(authR, userR)
-
-
-	var pass = "123"
-	bytePassword := []byte(pass)
-
-	password, _ := helpers.HashAndSalt(bytePassword)
-
-	reqValue := model.CreateUser{
-		Name:       "q",
-		LastName:   "q",
-		Password:   password,
-		Email:      "d123@ll.com",
-		Country:    "d",
-		Phone:      "d",
-		PostalCode: "d",
-	}
-
-
-	t.Run("SignUpd", func(t *testing.T) {
-		t.Parallel()
-		//		userID := uint64(5)
-		user := &model.CreateUser{
-			Name:       reqValue.Name,
-			LastName:   reqValue.LastName,
-			Email:      reqValue.Email,
-			Country:    reqValue.Country,
-			Phone:       reqValue.Phone,
-			PostalCode:  reqValue.PostalCode,
-			Password:   reqValue.Password,
-		}
-
-		var err error
-
-		var userResponse *model.User
-
-		var token model.TokenDetails
-
-		userR.EXPECT().Create(user).Return(userResponse, err)
-
-		authR.EXPECT().CreateToken(userResponse).Return(token, err)
-
-		authR.EXPECT().CreateAuth(userResponse, token)
-
-		model, token, err := authServerGRPC.SignUp(reqValue)
-		require.NoError(t, err)
-		require.NotNil(t, model)
-	})
-}
-*/
-
 func TestAuthService_Login(t *testing.T) {
 	t.Parallel()
 
