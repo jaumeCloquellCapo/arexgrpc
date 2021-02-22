@@ -3,7 +3,6 @@ package dic
 import (
 	"github.com/jaumeCloquellCapo/authGrpc/app/repository"
 	"github.com/jaumeCloquellCapo/authGrpc/app/service"
-	"github.com/jaumeCloquellCapo/authGrpc/internal/middleware"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/storage"
 	"github.com/sarulabs/dingo/generation/di"
 	"log"
@@ -61,20 +60,6 @@ func RegisterServices(builder *di.Builder) {
 	})
 
 	builder.Add(di.Def{
-		Name: AuthMiddleware,
-		Build: func(ctn di.Container) (interface{}, error) {
-			return middleware.NewAuthMiddleware(ctn.Get(AuthService).(service.AuthServiceInterface)), nil
-		},
-	})
-
-	builder.Add(di.Def{
-		Name: CorsMiddleware,
-		Build: func(ctn di.Container) (interface{}, error) {
-			return middleware.NewCorsMiddleware(), nil
-		},
-	})
-
-	builder.Add(di.Def{
 		Name: UserRepository,
 		Build: func(ctn di.Container) (interface{}, error) {
 			return repository.NewUserRepository(ctn.Get(DbService).(*storage.DbStore)), nil
@@ -100,19 +85,4 @@ func RegisterServices(builder *di.Builder) {
 			return service.NewAuthService(ctn.Get(AuthRepository).(repository.AuthRepositoryInterface), ctn.Get(UserRepository).(repository.UserRepositoryInterface)), nil
 		},
 	})
-
-	/*
-		builder.Add(di.Def{
-			Name: UserController,
-			Build: func(ctn di.Container) (interface{}, error) {
-				return controller.NewUserController(ctn.Get(UserService).(service.UserServiceInterface)), nil
-			},
-		})
-
-		builder.Add(di.Def{
-			Name: AuthController,
-			Build: func(ctn di.Container) (interface{}, error) {
-				return controller.NewAuthController(ctn.Get(AuthService).(service.AuthServiceInterface), ctn.Get(UserService).(service.UserServiceInterface)), nil
-			},
-		})*/
 }

@@ -11,7 +11,7 @@ type UserServiceInterface interface {
 	FindById(id int) (user *model.User, err error)
 	RemoveById(id int) error
 	UpdateById(id int, user model.UpdateUser) error
-	FindAll() ([]model.User, error)
+	//FindAll() ([]model.User, error)
 	FindByEmail(email string) (user *model.User, err error)
 }
 
@@ -48,9 +48,10 @@ func (s *userService) UpdateById(id int, user model.UpdateUser) error {
 }
 
 //FindAll ...
+/*
 func (s *userService) FindAll() ([]model.User, error) {
 	return s.userRepo.FindAll()
-}
+}*/
 
 //FindByEmail ...
 func (s *userService) FindByEmail(email string) (user *model.User, err error) {

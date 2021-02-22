@@ -30,7 +30,4 @@ func main() {
 
 	fmt.Print(response.AccessToke)
 
-	// gRPC client and connection
-	// ...
-
 }

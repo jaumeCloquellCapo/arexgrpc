@@ -40,7 +40,7 @@ func TestAuthRepositoryInit(t *testing.T) {
 	}
 }
 
-func TestUser_SetUserCtx(t *testing.T) {
+func TestAuthRepository_CreateAuth(t *testing.T) {
 	t.Parallel()
 
 	mr, err := miniredis.Run()

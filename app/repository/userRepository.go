@@ -6,7 +6,6 @@ import (
 	error2 "github.com/jaumeCloquellCapo/authGrpc/app/error"
 	"github.com/jaumeCloquellCapo/authGrpc/app/model"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/storage"
-	"log"
 )
 
 type userRepository struct {
@@ -15,7 +14,7 @@ type userRepository struct {
 
 //UserRepositoryInterface ...
 type UserRepositoryInterface interface {
-	FindAll() ([]model.User, error)
+	//FindAll() ([]model.User, error)
 	FindById(id int) (user *model.User, err error)
 	RemoveById(id int) error
 	UpdateById(id int, user model.UpdateUser) error
@@ -88,27 +87,6 @@ func (r *userRepository) FindByEmail(email string) (user *model.User, err error)
 		return nil, err
 	}
 	return user, nil
-}
-
-func (r *userRepository) FindAll() (users []model.User, err error) {
-	users = []model.User{}
-	var query = "SELECT id, email, name, password FROM users"
-	rows, err := r.db.Query(query)
-	defer rows.Close()
-
-	for rows.Next() {
-		var user = model.User{}
-		err := rows.Scan(&user.ID, &user.Email, &user.Name, &user.Password)
-		if err != nil {
-			log.Fatal(err)
-		}
-		users = append(users, user)
-	}
-	if err := rows.Err(); err != nil {
-		log.Fatal(err)
-	}
-
-	return
 }
 
 func (r *userRepository) Create(UserSignUp model.CreateUser) (user *model.User, err error) {

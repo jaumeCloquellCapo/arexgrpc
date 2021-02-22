@@ -1,63 +1,50 @@
 package repository
 
 import (
+	"github.com/DATA-DOG/go-sqlmock"
+	"github.com/jaumeCloquellCapo/authGrpc/app/model"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/storage"
-	"reflect"
+	"github.com/jmoiron/sqlx"
+	"github.com/stretchr/testify/require"
 	"testing"
 )
 
-func TestUserRepositoryInit(t *testing.T) {
-	type args struct {
-		db *storage.DbStore
-	}
-	tests := []struct {
-		name string
-		args args
-		want UserRepositoryInterface
-	}{
-		{
-			name: "success",
-			args: args{
-				db: nil,
-			},
-			want: &userRepository{
-				db: nil,
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := NewUserRepository(tt.args.db); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("UserInit() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-/*
-func TestUserRepository_Create(t *testing.T) {
+func TestUserRepository_FindByEmail(t *testing.T) {
 	t.Parallel()
 
-	db, _, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+	db, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
 	require.NoError(t, err)
+	defer db.Close()
+
 	sqlxDB := sqlx.NewDb(db, "db")
+	defer sqlxDB.Close()
 
-	fmt.Print(sqlxDB.DB.Ping())
+	userPGRepository := NewUserRepository(&storage.DbStore{DB:sqlxDB})
 
-	userPGRepository := NewUserRepository(&storage.DbStore{DB: sqlxDB})
-
-	mockUser := model.CreateUser{
+	columns := []string{"id", "email", "name", "password"}
+	userUUID := int64(1)
+	mockUser := &model.User{
+		ID:         userUUID,
 		Name:       "FirstName",
 		LastName:   "LastName",
+		Password:   "123456",
 		Email:      "email@gmail.com",
 		Country:    "es",
-		Phone:      "6254551",
-		PostalCode: "07440",
-		Password:   "123456",
+		Phone:      "es",
+		PostalCode: "es",
 	}
 
-	createdUser, err := userPGRepository.Create(mockUser)
-	fmt.Print(err.Error())
+	rows := sqlmock.NewRows(columns).AddRow(
+		userUUID,
+		mockUser.Email,
+		mockUser.Name,
+		mockUser.Password,
+	)
+
+	mock.ExpectQuery("SELECT id, email, name, password FROM users WHERE email = ?").WithArgs(mockUser.Email).WillReturnRows(rows)
+
+	foundUser, err := userPGRepository.FindByEmail(mockUser.Email)
 	require.NoError(t, err)
-	require.NotNil(t, createdUser)
+	require.NotNil(t, foundUser)
+	require.Equal(t, foundUser.Email, mockUser.Email)
 }
-*/
