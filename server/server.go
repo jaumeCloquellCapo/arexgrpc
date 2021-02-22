@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/jaumeCloquellCapo/authGrpc/app/delivery"
+	"github.com/jaumeCloquellCapo/authGrpc/app/handler"
 	"github.com/jaumeCloquellCapo/authGrpc/app/service"
 	grpc2 "github.com/jaumeCloquellCapo/authGrpc/grpc"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/dic"
@@ -48,7 +48,7 @@ func (s *Server) Run() error {
 	ac := s.container.Get(dic.AuthService).(service.AuthServiceInterface)
 	uc := s.container.Get(dic.UserService).(service.UserServiceInterface)
 
-	authGRPCServer := delivery.NewUserServerGRPC(ac, uc, logger)
+	authGRPCServer := handler.NewServerGRPC(ac, uc, logger)
 	grpc2.RegisterUserServiceServer(server, authGRPCServer)
 
 	go func() {

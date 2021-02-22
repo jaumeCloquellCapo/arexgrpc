@@ -1,4 +1,4 @@
-package delivery
+package handler
 
 import (
 	"context"
@@ -18,7 +18,7 @@ type microservice struct {
 }
 
 // Auth service constructor
-func NewUserServerGRPC(authService service.AuthServiceInterface, uService service.UserServiceInterface, logger logger.Logger) *microservice {
+func NewServerGRPC(authService service.AuthServiceInterface, uService service.UserServiceInterface, logger logger.Logger) *microservice {
 	return &microservice{
 		authService,
 		uService,
