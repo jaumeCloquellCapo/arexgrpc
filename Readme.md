@@ -13,15 +13,14 @@
 * [Docker](https://www.docker.com/) - Docker
 
 #### Recommendation for local development most comfortable usage:
-    make run // run all containers
+    make run // run container
     make client // run the example client grpc to cal to our container
 
 #### Docker-compose files:
-    docker-compose.yml - run postgresql, redis
+    docker-compose.yml - run postgresql, redis // PRO
+    docker-compose -f docker-compose.dev.yml up // DEV Run only postgresql, redis
 
 
-### Docker development usage:
-    make docker
 
 ### Local development usage:
     make migrate_dev // to run the migrations 
