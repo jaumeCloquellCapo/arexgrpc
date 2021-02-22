@@ -61,8 +61,7 @@ func (l *apiLogger) InitLogger() {
 
 	var encoderCfg zapcore.EncoderConfig
 
-		encoderCfg = zap.NewDevelopmentEncoderConfig()
-
+	encoderCfg = zap.NewDevelopmentEncoderConfig()
 
 	var encoder zapcore.Encoder
 	encoderCfg.LevelKey = "LEVEL"

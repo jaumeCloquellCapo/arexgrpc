@@ -15,7 +15,7 @@ Login(user model.Credentials) (tokenDetails model.TokenDetails, err error)
 Logout(accessUUID string) error
 SignUp(UserSignUp model.CreateUser) (user *model.User, tokenDetails model.TokenDetails, err error)
 GetAuth(AccessUUID string) (int64, error)
- */
+*/
 
 // MockAuthServiceUseCase is a mock of UserUseCase interface
 type MockAuthServiceUseCase struct {
@@ -40,9 +40,8 @@ func (m *MockAuthServiceUseCase) EXPECT() *MockAuthUseCaseMockRecorder {
 	return m.recorder
 }
 
-
 // Login mocks base method
-func (m *MockAuthServiceUseCase) Login(Credentials model.Credentials) (tokenDetails model.TokenDetails, err error){
+func (m *MockAuthServiceUseCase) Login(Credentials model.Credentials) (tokenDetails model.TokenDetails, err error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Login", Credentials)
 	ret0, _ := ret[0].(model.TokenDetails)
@@ -86,9 +85,8 @@ func (mr *MockAuthUseCaseMockRecorder) SignUp(UserSignUp interface{}) *gomock.Ca
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SignUp", reflect.TypeOf((*MockAuthServiceUseCase)(nil).SignUp), UserSignUp)
 }
 
-
 // FindById mocks base method
-func (m *MockAuthServiceUseCase)GetAuth(AccessUUID string) (int64, error) {
+func (m *MockAuthServiceUseCase) GetAuth(AccessUUID string) (int64, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetAuth", AccessUUID)
 	ret0, _ := ret[0].(int64)

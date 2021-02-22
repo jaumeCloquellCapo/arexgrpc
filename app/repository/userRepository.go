@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"github.com/go-sql-driver/mysql"
 	error2 "github.com/jaumeCloquellCapo/authGrpc/app/error"
 	"github.com/jaumeCloquellCapo/authGrpc/app/model"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/storage"
@@ -33,7 +32,7 @@ func NewUserRepository(db *storage.DbStore) UserRepositoryInterface {
 func (r *userRepository) FindById(id int) (user *model.User, err error) {
 	user = &model.User{}
 
-	var query = "SELECT id, email, name, postal_code, phone, last_name, country FROM users WHERE id = ?"
+	var query = "SELECT id, email, name, postal_code, phone, last_name, country FROM users WHERE id = $1"
 	row := r.db.QueryRow(query, id)
 
 	if err := row.Scan(&user.ID, &user.Email, &user.Name, &user.PostalCode, &user.Phone, &user.LastName, &user.Country); err != nil {
@@ -55,7 +54,7 @@ func (r *userRepository) RemoveById(id int) error {
 
 //UpdateById ...
 func (r *userRepository) UpdateById(id int, user model.UpdateUser) error {
-	result, err := r.db.Exec("UPDATE users SET name = ?, email = ?, last_name = ?, phone = ?, postal_code = ?, country = ? where id = ?", user.Name, user.Email, user.LastName, user.Phone, user.PostalCode, user.Country, id)
+	result, err := r.db.Exec("UPDATE users SET name = $1, email = $2, last_name = $3, phone = $4, postal_code = $5, country = $6 where id = $7", user.Name, user.Email, user.LastName, user.Phone, user.PostalCode, user.Country, id)
 	if err != nil {
 		return err
 	}
@@ -77,7 +76,7 @@ func (r *userRepository) FindByEmail(email string) (user *model.User, err error)
 
 	user = &model.User{}
 
-	var query = "SELECT id, email, name, password FROM users WHERE email = ?"
+	var query = "SELECT id, email, name, password FROM users WHERE email = $1"
 	row := r.db.QueryRow(query, email)
 
 	if err := row.Scan(&user.ID, &user.Email, &user.Name, &user.Password); err != nil {
@@ -90,25 +89,26 @@ func (r *userRepository) FindByEmail(email string) (user *model.User, err error)
 }
 
 func (r *userRepository) Create(UserSignUp model.CreateUser) (user *model.User, err error) {
-	query := "INSERT INTO users (name, password, email, last_name, phone, postal_code, country) values  (?, ?, ?, ?, ?, ?, ?)"
-	res, err := r.db.Exec(query, UserSignUp.Name, UserSignUp.Password, UserSignUp.Email, UserSignUp.LastName, UserSignUp.Phone, UserSignUp.PostalCode, UserSignUp.Country)
+	//query := "INSERT INTO users (name, password, email, last_name, phone, postal_code, country) values  ($1, $2, $3, $4, $5, $6, $7) RETURNING id"
+	createUserQuery := `INSERT INTO users (name, password, email, last_name, phone, postal_code, country) 
+		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		RETURNING id`
+
+
+	stmt, err := r.db.Prepare(createUserQuery)
 	if err != nil {
-		if me, ok := err.(*mysql.MySQLError); ok {
-			if me.Number == 1062 {
-				return nil, error2.ErrEmailExists
-			}
-		}
-		return
+		return nil, err
 	}
-
-	id, err := res.LastInsertId()
-
+	defer stmt.Close()
+	var userId int64
+	err = stmt.QueryRow(UserSignUp.Name, UserSignUp.Password, UserSignUp.Email, UserSignUp.LastName, UserSignUp.Phone, UserSignUp.PostalCode, UserSignUp.Country).Scan(&userId)
 	if err != nil {
+
 		return nil, err
 	}
 
 	return &model.User{
-		ID:         id,
+		ID:         userId,
 		Name:       UserSignUp.Name,
 		Email:      UserSignUp.Email,
 		LastName:   UserSignUp.LastName,

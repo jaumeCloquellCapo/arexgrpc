@@ -25,13 +25,10 @@ func NewAuthServer(container di.Container) *Server {
 	return &Server{container: container}
 }
 
-
 // Run service
 func (s *Server) Run() error {
 	logger := logger.NewAPILogger()
 	logger.InitLogger()
-
-
 
 	l, err := net.Listen("tcp", ":8888")
 	if err != nil {
@@ -42,7 +39,6 @@ func (s *Server) Run() error {
 
 	im := interceptors.NewInterceptorManager(logger)
 	grpc.UnaryInterceptor(im.Logger)
-
 
 	server := grpc.NewServer(grpc.UnaryInterceptor(im.Logger))
 	ac := s.container.Get(dic.AuthService).(service.AuthServiceInterface)

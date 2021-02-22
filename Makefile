@@ -9,7 +9,10 @@ test:							## Run all tests
 	@go test ./...
 
 migrate_dev:
-	@goose -dir ./migrations mysql "db:db@tcp(localhost)/db?parseTime=true" up
+	@goose -dir ./migrations postgres "postgresql://db:db@localhost?sslmode=disable" up
+
+migrate_generate:
+	@goose -dir ./migrations postgres "postgresql://db:db@localhost?sslmode=disable" create create_user
 
 proto:
 	protoc -I grpc -I. \

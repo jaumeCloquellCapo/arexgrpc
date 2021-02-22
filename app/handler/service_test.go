@@ -22,7 +22,7 @@ func TestMicroservice_Login(t *testing.T) {
 	apiLogger := logger.NewAPILogger()
 	apiLogger.InitLogger()
 
-	authServerGRPC := NewServerGRPC(sessUC,userUC, apiLogger)
+	authServerGRPC := NewServerGRPC(sessUC, userUC, apiLogger)
 
 	reqValue := &grpc.LoginRequest{
 		Email:    "email@gmail.com",
@@ -44,7 +44,6 @@ func TestMicroservice_Login(t *testing.T) {
 			RtExpires:    0,
 		}
 		sessUC.EXPECT().Login(credentials).Return(tokenDetails, nil)
-
 
 		response, err := authServerGRPC.Login(context.Background(), reqValue)
 		require.NoError(t, err)

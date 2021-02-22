@@ -16,7 +16,7 @@ RemoveById(id int) error
 UpdateById(id int, user model.UpdateUser) error
 //FindAll() ([]model.User, error)
 FindByEmail(email string) (user *model.User, err error)
- */
+*/
 
 // MockAuthServiceUseCase is a mock of UserUseCase interface
 type MockServiceUseCase struct {
@@ -56,7 +56,6 @@ func (mr *MockUserUseCaseMockRecorder) FindById(id interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "FindById", reflect.TypeOf((*MockServiceUseCase)(nil).FindById), id)
 }
 
-
 // Register mocks base method
 func (m *MockServiceUseCase) RemoveById(id int) error {
 	m.ctrl.T.Helper()
@@ -71,8 +70,6 @@ func (mr *MockUserUseCaseMockRecorder) RemoveById(id interface{}) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "RemoveById", reflect.TypeOf((*MockServiceUseCase)(nil).RemoveById), id)
 }
 
-
-
 // Register mocks base method
 func (m *MockServiceUseCase) UpdateById(id int, user model.UpdateUser) error {
 	m.ctrl.T.Helper()
@@ -86,7 +83,6 @@ func (mr *MockUserUseCaseMockRecorder) UpdateById(id, user interface{}) *gomock.
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateById", reflect.TypeOf((*MockServiceUseCase)(nil).UpdateById), id, user)
 }
-
 
 // Register mocks base method
 func (m *MockServiceUseCase) FindByEmail(email string) (user *model.User, err error) {
