@@ -25,3 +25,6 @@
 
 ### Local development usage:
     make migrate_dev // to run the migrations 
+
+
+This project is a implementation from the project https://github.com/jaumeCloquellCapo/go-api-boirplate to GRPC

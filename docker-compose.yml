@@ -1,6 +1,23 @@
 version: '3'
 
 services:
+  auth_microservice:
+    container_name: auth_microservice
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+      - redis
+    restart: always
+    volumes:
+      - ./:/app
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+
   db:
     image: mysql
     environment:
