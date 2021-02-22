@@ -6,6 +6,7 @@ import (
 	"github.com/jaumeCloquellCapo/authGrpc/app/service"
 	grpc2 "github.com/jaumeCloquellCapo/authGrpc/grpc"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/dic"
+	"github.com/jaumeCloquellCapo/authGrpc/internal/interceptors"
 	"github.com/jaumeCloquellCapo/authGrpc/internal/logger"
 	"github.com/sarulabs/dingo/generation/di"
 	"google.golang.org/grpc"
@@ -25,9 +26,14 @@ func NewAuthServer(container di.Container) *Server {
 	return &Server{container: container}
 }
 
+
 // Run service
 func (s *Server) Run() error {
 	logger := logger.NewAPILogger()
+	logger.InitLogger()
+
+
+
 	l, err := net.Listen("tcp", "0.0.0.0:8888")
 	if err != nil {
 		logger.Fatal(err)
@@ -35,7 +41,11 @@ func (s *Server) Run() error {
 	}
 	defer l.Close()
 
-	server := grpc.NewServer()
+	im := interceptors.NewInterceptorManager(logger)
+	grpc.UnaryInterceptor(im.Logger)
+
+
+	server := grpc.NewServer(grpc.UnaryInterceptor(im.Logger))
 	ac := s.container.Get(dic.AuthService).(service.AuthServiceInterface)
 	uc := s.container.Get(dic.UserService).(service.UserServiceInterface)
 
@@ -54,7 +64,6 @@ func (s *Server) Run() error {
 
 	<-quit
 	server.GracefulStop()
-
 
 	return nil
 }

@@ -20,6 +20,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.2.0
+	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jmoiron/sqlx v1.3.1
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.9.0 // indirect
@@ -29,6 +30,7 @@ require (
 	github.com/pressly/goose v2.7.0+incompatible // indirect
 	github.com/prometheus/client_golang v1.9.0
 	github.com/sarulabs/dingo v2.0.0+incompatible
+	github.com/sirupsen/logrus v1.8.0 // indirect
 	github.com/stretchr/testify v1.6.1
 	github.com/twinj/uuid v1.0.0
 	github.com/ziutek/mymysql v1.5.4 // indirect

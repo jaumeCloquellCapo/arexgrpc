@@ -6,8 +6,10 @@ run:
 	@go run main.go
 
 run:
-	@go run server/server.go
+	@go run cmd/server/main.go
 
+client:
+	@go run cmd/client/main.go
 
 test:							## Run all tests
 	@go test ./...

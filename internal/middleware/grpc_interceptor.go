@@ -75,8 +75,6 @@ func VerifyTokenFromContext(ctx context.Context) (*jwt.Token, error) {
 		return nil, grpc.Errorf(codes.Unauthenticated, "invalid authorization")
 	}
 
-	fmt.Printf(*tokenString)
-
 	token, err := jwt.Parse(*tokenString, func(token *jwt.Token) (interface{}, error) {
 		//Make sure that the token method conform to "SigningMethodHMAC"
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
@@ -90,8 +88,8 @@ func VerifyTokenFromContext(ctx context.Context) (*jwt.Token, error) {
 
 //ExtractToken extract token from Authorization header
 func extractTokenFromContext(ctx context.Context) *string {
-	meta, ok := metadata.FromIncomingContext(ctx)
 
+	meta, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		return nil
 	}
@@ -99,9 +97,8 @@ func extractTokenFromContext(ctx context.Context) *string {
 	if len(meta["authorization"]) != 1 {
 		return nil
 	}
-	authorization := meta["authorization"][0]
 
-	return &authorization
+	return &meta["authorization"][0]
 }
 
 /**
@@ -109,6 +106,9 @@ ExtractTokenContext
 */
 func GetAccessTokenFromContext(ctx context.Context) (AccessDetails *model.AccessDetails, err error) {
 	token, err := VerifyTokenFromContext(ctx)
+	if err != nil {
+		return nil, err
+	}
 
 	claims, ok := token.Claims.(jwt.MapClaims)
 

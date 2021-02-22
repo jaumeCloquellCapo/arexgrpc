@@ -80,11 +80,13 @@ func (u *microservice) Logout(ctx context.Context, request *grpc.LogoutRequest) 
 	tokenAuth, err := middleware.GetAccessTokenFromContext(ctx)
 
 	if err != nil {
+		u.logger.Error(err)
 		return nil, status.Errorf(errorNotFound.ParseGRPCErrStatusCode(err), "Logout: %v", err)
 	}
 	err = u.authService.Logout(tokenAuth.AccessUUID)
 
 	if err != nil {
+		u.logger.Error(err)
 		return nil, status.Errorf(errorNotFound.ParseGRPCErrStatusCode(err), "Logout: %v", err)
 	}
 
