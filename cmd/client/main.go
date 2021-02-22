@@ -13,6 +13,7 @@ import (
 func main() {
 	ctx := context.Background()
 	var conn *grpc.ClientConn
+
 	conn, err := grpc.Dial(":8888", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)

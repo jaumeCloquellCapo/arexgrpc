@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"github.com/jaumeCloquellCapo/authGrpc/app/delivery"
 	"github.com/jaumeCloquellCapo/authGrpc/app/service"
 	grpc2 "github.com/jaumeCloquellCapo/authGrpc/grpc"
@@ -34,7 +33,7 @@ func (s *Server) Run() error {
 
 
 
-	l, err := net.Listen("tcp", "0.0.0.0:8888")
+	l, err := net.Listen("tcp", ":8888")
 	if err != nil {
 		logger.Fatal(err)
 		return err
@@ -53,7 +52,7 @@ func (s *Server) Run() error {
 	grpc2.RegisterUserServiceServer(server, authGRPCServer)
 
 	go func() {
-		fmt.Print("server listen on port 8888")
+		logger.Info("server listen on port 8888")
 		if err := server.Serve(l); err != nil {
 			logger.Fatal(err)
 		}
