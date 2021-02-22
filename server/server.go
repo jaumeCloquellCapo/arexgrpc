@@ -34,13 +34,8 @@ func (s *Server) Run() error {
 		return err
 	}
 	defer l.Close()
-	//grpcMiddleware := middleware.NewInterceptor(os.Getenv("ACCESS_SECRET"))
-	//im := interceptors.NewInterceptorManager(logger)
 
-	server := grpc.NewServer(
-	//grpc.UnaryInterceptor(im.Logger),
-	//grpc.UnaryInterceptor(grpcMiddleware.Auth),
-	)
+	server := grpc.NewServer()
 	ac := s.container.Get(dic.AuthService).(service.AuthServiceInterface)
 	uc := s.container.Get(dic.UserService).(service.UserServiceInterface)
 
@@ -59,7 +54,7 @@ func (s *Server) Run() error {
 
 	<-quit
 	server.GracefulStop()
-	//s.logger.Info("Server Exited Properly")
+
 
 	return nil
 }
